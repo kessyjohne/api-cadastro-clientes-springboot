@@ -2,6 +2,7 @@ package com.kessy.api.cadastro.cliente.controller;
 
 import com.kessy.api.cadastro.cliente.model.Cliente;
 import com.kessy.api.cadastro.cliente.repository.ClienteRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,7 +16,7 @@ public class ClienteController {
     private ClienteRepository clienteRepository;
 
     @PostMapping
-    public Cliente criar(@RequestBody Cliente cliente){
+    public Cliente criar(@Valid @RequestBody Cliente cliente){
         return clienteRepository.save(cliente);
     }
 
@@ -30,7 +31,7 @@ public class ClienteController {
     }
 
     @PutMapping("/{id}")
-    public Cliente atualizar(@PathVariable Long id, @RequestBody Cliente clienteAtualizado){
+    public Cliente atualizar(@Valid @PathVariable Long id, @RequestBody Cliente clienteAtualizado){
         clienteAtualizado.setId(id);
         return clienteRepository.save(clienteAtualizado);
     }
